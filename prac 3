@@ -1,0 +1,35 @@
+%{
+#include<stdio.h>
+
+int count = 0;
+%}
+
+/* Regular Expression */
+WORD    [Aa][a-zA-Z]*
+
+%%
+
+{WORD}      { count++; }
+
+[ \t\n]+    ;
+
+.           ;
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Reading Input File...\n\n");
+
+    yylex();
+
+    printf("\n========= RESULT =========\n");
+    printf("Words starting with 'A' or 'a' : %d\n", count);
+
+    return 0;
+}
